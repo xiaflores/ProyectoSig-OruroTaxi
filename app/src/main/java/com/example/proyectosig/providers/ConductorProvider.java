@@ -14,4 +14,8 @@ public class ConductorProvider {
 
         return mDatabase.child(conductor.getId()).setValue(conductor);
     }
+    public DatabaseReference getConductor(String idConductor){
+        return mDatabase.child(idConductor);
+    }
+
 }

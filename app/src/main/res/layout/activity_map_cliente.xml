@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.cliente.MapClienteActivity">
+    tools:context=".view.cliente.MapClienteActivity">
     <include layout="@layout/action_bar_toollbar"></include>
     <fragment
         android:id="@+id/map"
@@ -19,32 +19,16 @@
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_marginTop="20dp">
+
     <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
         android:background="@color/colorWhite"
         app:cardCornerRadius="20dp"
         >
-
-        <fragment
-            android:id="@+id/placeAutocompleteOrigen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/colorWhite"
-        app:cardCornerRadius="20dp">
         <fragment
             android:id="@+id/placeAutocompleteDestino"
             android:layout_width="match_parent"
@@ -53,20 +37,48 @@
     </androidx.cardview.widget.CardView>
     </LinearLayout>
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:src="@drawable/icon_marker_client"
         android:layout_gravity="center"/>
-    <Button
-        android:id="@+id/btnRequestConductor"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_button"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Soliciatr Viaje"
-        android:textColor="@color/colorWhite"
-        android:layout_gravity="bottom"
-        android:layout_margin="20dp"
-        />
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_gravity="bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Origen: "
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txtOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="boolivar"
+                android:textSize="16sp" />
+        </LinearLayout>
+            <Button
+                android:id="@+id/btnRequestConductor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Soliciatr Viaje"
+                android:textColor="@color/colorWhite"
+                android:layout_gravity="bottom"
+            />
+
+    </LinearLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -5,86 +5,137 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.LoginActivity">
 
-    <include layout="@layout/action_bar_toollbar"></include>
-    <LinearLayout
+    tools:context=".view.LoginActivity">
+    <ImageView
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="25dp"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="footer"
+        android:scaleType="fitXY"
+        android:src="@drawable/footer_login" />
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+        <include
+            android:id="@+id/idtoolbar"
+            layout="@layout/action_bar_toollbar"
+            />
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/icon_taxi"
-            android:layout_marginBottom="10dp"/>
-
-        <LinearLayout
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/email"/>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Correo electronico"
-                    android:inputType="textEmailAddress">
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/password"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_height="wrap_content">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Contraseña"
-                    android:inputType="textPassword">
+            android:layout_height="250dp"
+            android:contentDescription="header"
+            android:layout_marginTop="60dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_login" />
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBottom="@+id/header"
+            android:text="Login"
+            android:textSize="40sp"
+            />
+        <ScrollView
+            android:id="@+id/sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="bottom">
-            <Button
-                android:id="@+id/btnLogin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ingresar"
-                android:layout_margin="30dp"
-                android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/colorPrimary"
-                android:textColor="@color/colorWhite"/>
-        </LinearLayout>
+            android:layout_below="@+id/header">
+            <RelativeLayout
 
-    </LinearLayout>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="-70dp"
+                >
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="50dp"
+                    app:cardCornerRadius="70dp"
+                    app:cardElevation="3dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Correo electornio"
+                            android:layout_margin="15dp"
+                            android:padding="10dp"
+                            android:drawableLeft="@drawable/ic_email"
+                            android:drawablePadding="30dp"
+                            android:inputType="text"
+                            android:background="@android:color/transparent"/>
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/colorPlomo"
+                            android:layout_below="@id/textInputEmail"/>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/textInputPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Password"
+                            android:layout_margin="15dp"
+                            android:layout_below="@+id/view1"
+                            android:inputType="textPassword"
+                            android:padding="10dp"
+                            android:drawableLeft="@drawable/ic_password"
+                            android:drawablePadding="30dp"
+                            android:background="@android:color/transparent"/>
+
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="10dp"
+                    android:layout_alignTop="@+id/cv"
+                    android:layout_alignBottom="@+id/cv"
+                    android:layout_alignRight="@+id/cv"
+                    android:layout_marginRight="-20dp"
+                    >
+                    <ImageButton
+                        android:id="@+id/btnLogin"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/bt_ui"
+                        android:src="@drawable/ic_arrow"
+                        android:backgroundTint="@color/colorPrimary"
+                        />
+
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/txtRegisterUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Registrarse"
+                    android:layout_below="@+id/cv"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginLeft="80dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    />
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

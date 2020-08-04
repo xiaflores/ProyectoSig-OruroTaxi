@@ -10,7 +10,6 @@ public class Cliente {
         this.name = name;
         this.email = email;
     }
-
     public String getId() {
         return id;
     }

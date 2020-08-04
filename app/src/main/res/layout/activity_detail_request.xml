@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.cliente.DetailRequestActivity">
+    tools:context=".view.cliente.DetailRequestActivity">
     <include layout="@layout/action_bar_toollbar"></include>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/txtViewOrigin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="boolivar"
+                android:text="Ciudad de Oruro"
                 android:textSize="16sp"
                 />
         </LinearLayout>
@@ -117,6 +117,26 @@
                 android:textSize="16sp"
                 />
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tarifa: "
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txtViewRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
         </LinearLayout>
 
         <Button

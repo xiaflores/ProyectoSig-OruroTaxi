@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary"
-    tools:context=".activities.MainActivity">
+    android:background="@drawable/background"
+    tools:context=".view.MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -15,51 +15,77 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:src="@drawable/icon_taxi" />
+            android:src="@drawable/logo_app"
+             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
-            android:text="App de servicio de transporte"
+            android:layout_margin="10dp"
+            android:text="Seleccione si es pasajero o conductor"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="25sp"
+            android:textColor="@color/colorPlomo"
+            android:textSize="17sp"
             android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="bottom"
-            android:layout_margin="20dp"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
 
             <Button
                 android:id="@+id/btnCliente"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/rounded_button"
-                android:text="Cliente"
-                android:backgroundTint="@color/colorBlueLight"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/colorWhite"/>
-
+                android:backgroundTint="@color/colorWhite"
+                android:text="Pasajero"
+                android:textSize="19sp"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/btnConductor"
-                android:layout_width="0dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
+                android:layout_gravity="center"
                 android:backgroundTint="@color/colorWhite"
                 android:text="Conductor"
+                android:textSize="19sp"
+                android:textColor="@color/colorPrimary"
                 android:background="@drawable/rounded_button"/>
+
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:gravity="bottom">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Bienvenido al servicio de taxis "
+                android:textColor="@color/colorPlomo"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="online"
+                android:textColor="@color/colorPrimary"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

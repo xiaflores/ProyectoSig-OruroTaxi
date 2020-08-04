@@ -5,13 +5,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.proyectosig.activities.conductor.MapConductorBookingActivity;
+import com.example.proyectosig.view.conductor.MapConductorServiceActivity;
 import com.example.proyectosig.providers.AuthProvider;
-import com.example.proyectosig.providers.ClientBookingProvider;
+import com.example.proyectosig.providers.ClientServiceProvider;
 import com.example.proyectosig.providers.GeofireProvider;
 
 public class AceptReceiver extends BroadcastReceiver {
-    private ClientBookingProvider mClientBookingProvider;
+    private ClientServiceProvider mClientServiceProvider;
     private GeofireProvider mGeofireProvider;
     public AuthProvider mAuthProvider;
     @Override
@@ -20,12 +20,12 @@ public class AceptReceiver extends BroadcastReceiver {
         mGeofireProvider =new GeofireProvider("conductor_activo");
         mGeofireProvider.removeLocation(mAuthProvider.getId());
         String idClient=intent.getExtras().getString("idClient");
-        mClientBookingProvider=new ClientBookingProvider();
-            mClientBookingProvider.updateStatus(idClient,"accept");
+        mClientServiceProvider =new ClientServiceProvider();
+            mClientServiceProvider.updateStatus(idClient,"accept");
 
             NotificationManager manager=(NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
             manager.cancel(2);
-            Intent intent1=new Intent(context, MapConductorBookingActivity.class);
+            Intent intent1=new Intent(context, MapConductorServiceActivity.class);
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent1.setAction(Intent.ACTION_RUN);
             intent1.putExtra("idClient",idClient);
