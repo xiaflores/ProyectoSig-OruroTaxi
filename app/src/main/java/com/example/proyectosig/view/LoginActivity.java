@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog mDialog;
 
     TextView mRegisterUser;
+    TextView mForgotPassword;
     SharedPreferences mPref;
 
     @Override
@@ -52,18 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         mTextInputPassword=findViewById(R.id.textInputPassword);
         mImageButtonLogin=findViewById(R.id.btnLogin);
         mRegisterUser=findViewById(R.id.txtRegisterUser);
-
+        mForgotPassword=findViewById(R.id.txtForgotPassword);
         mAuth= FirebaseAuth.getInstance();
         mDatabase= FirebaseDatabase.getInstance().getReference();
 
-
         mPref=getApplicationContext().getSharedPreferences("TypeUser",MODE_PRIVATE);
-
         mDialog=new SpotsDialog.Builder().setContext(LoginActivity.this).setMessage("Espere un momemnto").build();
+
         mImageButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                    login();
             }
         });
         mRegisterUser.setOnClickListener(new View.OnClickListener() {
@@ -72,47 +72,61 @@ public class LoginActivity extends AppCompatActivity {
                 goToRegister();
             }
         });
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                forgotPassword();
+            }
+        });
     }
     private void login(){
-        String email= mTextInputEmail.getText().toString();
-        String password= mTextInputPassword.getText().toString();
+        String email = mTextInputEmail.getText().toString();
+        String password = mTextInputPassword.getText().toString();
         if(!email.isEmpty() && !password.isEmpty()){
-
-            if(password.length()>=6){
-                mDialog.show();
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()) {
-                            String user=mPref.getString("user","");
-                            if(user.equals("cliente")){
-                                Intent intent=new Intent(LoginActivity.this , MapClienteActivity.class);
-                                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                            }
-                            else{
-                                Intent intent=new Intent(LoginActivity.this , MapConductorActivity.class);
-                                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-
-                            }
-
-                            Toast.makeText(LoginActivity.this, "El login se realizo exitosamente", Toast.LENGTH_SHORT).show();
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this, "El email o password son incorrectos", Toast.LENGTH_SHORT).show();
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "La contraseña o el password son incorrectos", Toast.LENGTH_SHORT).show();
+                        else {
+                            checkIfEmailVerified();
                         }
-                        mDialog.dismiss();  
                     }
                 });
-            }
-            else{
-                Toast.makeText(this, "La contraseña debe tener mas de 6 caracteres", Toast.LENGTH_SHORT).show();
-            }
-
         }
         else{
             Toast.makeText(this, "la contraseña y el correo son obligatorios", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void checkIfEmailVerified()
+    {
+        String user = mPref.getString("user", "");
+        if (mAuth.getCurrentUser().isEmailVerified())
+        {
+            mDialog.show();
+            if (user.equals("cliente")) {
+                Intent intent = new Intent(LoginActivity.this, MapClienteActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(LoginActivity.this, MapConductorActivity.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+            // user is verified, so you can finish this activity or send user to activity which you want.
+            finish();
+            Toast.makeText(LoginActivity.this, "El login se realizo exitosamente", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            // email is not verified, so just prompt the message to the user and restart this activity.
+            // NOTE: don't forget to log out the user.
+            Toast.makeText(LoginActivity.this, "verifique su correo electronico en su bandeja de entrada", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
+            //restart this activity
         }
     }
     public void goToRegister(){
@@ -126,5 +140,8 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
+    public void forgotPassword(){
+        Intent intent=new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(intent);
+    }
 }

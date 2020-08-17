@@ -74,7 +74,7 @@
                             android:id="@+id/textInputEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Correo electornio"
+                            android:hint="Correo electronico"
                             android:layout_margin="15dp"
                             android:padding="10dp"
                             android:drawableLeft="@drawable/ic_email"
@@ -122,7 +122,21 @@
                         android:backgroundTint="@color/colorPrimary"
                         />
 
+
                 </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtForgotPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="¿Olvidaste tu contraseña?"
+                    android:layout_below="@+id/cv"
+                    android:layout_marginTop="10dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    />
+
                 <TextView
                     android:id="@+id/txtRegisterUser"
                     android:layout_width="wrap_content"

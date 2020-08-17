@@ -15,6 +15,8 @@ import com.example.proyectosig.includes.MyToolbar;
 import com.example.proyectosig.models.Conductor;
 import com.example.proyectosig.providers.AuthProvider;
 import com.example.proyectosig.providers.ConductorProvider;
+import com.example.proyectosig.view.LoginActivity;
+import com.example.proyectosig.view.cliente.RegisterActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -34,6 +36,7 @@ public class RegisterConductorActivity extends AppCompatActivity {
     TextInputEditText mTextInputMarca;
     TextInputEditText mTextInputPlaca;
     TextInputEditText mTextInputPassword;
+    TextInputEditText mTextConfirmePassword;
 
 
     AlertDialog mDialog;
@@ -56,6 +59,7 @@ public class RegisterConductorActivity extends AppCompatActivity {
         mTextInputMarca=findViewById(R.id.textInputMarca);
         mTextInputPlaca=findViewById(R.id.textInputPlaca);
         mTextInputPassword=findViewById(R.id.textInputPassword);
+        mTextConfirmePassword=findViewById(R.id.textConfirmPassword);
 
 
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
@@ -71,10 +75,16 @@ public class RegisterConductorActivity extends AppCompatActivity {
         final String marca=mTextInputMarca.getText().toString();
         final String placa=mTextInputPlaca.getText().toString();
         final String password=mTextInputPassword.getText().toString();
+        final String confirmpassword=mTextConfirmePassword.getText().toString();
         if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && !marca.isEmpty() && !placa.isEmpty() ){
             if(password.length()>=6){
-                mDialog.show();
-                register(name,email,password,marca,placa);
+                if(confirmpassword.equals(password)){
+                    mDialog.show();
+                    register(name,email,password,marca,placa);
+                }
+                else{
+                    Toast.makeText(this, "Confirme su contraseña", Toast.LENGTH_SHORT).show();
+                }
             }
             else{
                 Toast.makeText(this, "la contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
@@ -94,7 +104,9 @@ public class RegisterConductorActivity extends AppCompatActivity {
                     String id= FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Conductor conductor=new Conductor(id,name,email,marca,placa);
                     create(conductor);
-
+                    mAuthPorvider.sendVerificatioEmail();
+                    Toast.makeText(RegisterConductorActivity.this, "Confirme su correo", Toast.LENGTH_SHORT).show();
+                    mAuthPorvider.logout();
                 }
                 else{
                     Toast.makeText(RegisterConductorActivity.this, "No se pudo registrar la usuario", Toast.LENGTH_SHORT).show();
@@ -107,7 +119,7 @@ public class RegisterConductorActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                    Intent intent=new Intent(RegisterConductorActivity.this , MapConductorActivity.class);
+                    Intent intent=new Intent(RegisterConductorActivity.this , LoginActivity.class);
                     intent.addFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }
